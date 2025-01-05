@@ -1,7 +1,7 @@
 
 "use client"
 import React, { useState } from 'react';
-import { Search, Github, ExternalLink, Code, Play } from 'lucide-react';
+import { Search, Github, ExternalLink, Code, Play, Twitter } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -127,7 +127,7 @@ const Projects = () => {
       title: 'AI Interviewer',
       description: "An innovative web application that simulates job interviews using AI. Features include real-time speech recognition, dynamic question generation based on job descriptions, and immediate feedback on responses. Built with Rect for the frontend and integrated with Gemini's API for natural language processing.",
       Source: "https://github.com/frecklehead/Interview_master",
-      videoUrl: "https://youtube.com/shorts/RjNvuGcEU8s", 
+      videoUrl: "https://youtu.be/W_kAuqjCuyA", 
       tags: ['Firebase', 'GeminiAPI', 'Speech Recognition', 'AI']
     },
     {
@@ -169,7 +169,7 @@ const Projects = () => {
     {
       title: "Movie Recommender App",
       description: "Recommend you what to watch next based on 10000 movie dataset, made using steamlit. Features collaborative filtering and content-based recommendation systems with an intuitive user interface.",
-      Source: "https://x.com/aryal_prashamsa/status/1808559331392245829",
+     link: "https://x.com/aryal_prashamsa/status/1808559331392245829",
       tags: ['Streamlit', 'Recommendation System', 'Data Science', 'Python']
     }
   ];
