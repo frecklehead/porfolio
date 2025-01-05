@@ -17,6 +17,7 @@ const ContentSlider = ({ slides }) => {
   return (
     <div className="relative w-full">
       {/* Navigation Buttons */}
+               
       <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between z-10 px-4">
         <button
           onClick={prevSlide}
@@ -33,7 +34,7 @@ const ContentSlider = ({ slides }) => {
       </div>
 
       {/* Content and Image Container */}
-      <div className="overflow-hidden rounded-2xl bg-white/70 backdrop-blur-lg border border-emerald-100 shadow-lg">
+      <div className="overflow-hidden rounded-2xl bg-white/70 backdrop-blur-lg border border-emerald-100 shadow-lg"> 
         <div 
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -43,6 +44,7 @@ const ContentSlider = ({ slides }) => {
               <div className="grid lg:grid-cols-2 gap-12 p-12">
                 {/* Image */}
                 <div className="relative h-[500px] rounded-2xl overflow-hidden group">
+                  
                   <div className="absolute inset-0 bg-emerald-600/10 group-hover:bg-emerald-600/0 transition-colors duration-300" />
                   <Image
                     src={slide.image}
@@ -168,11 +170,13 @@ const About = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-white to-emerald-50 pt-8 pb-20">
+    <section id ="about" className="relative min-h-screen bg-gradient-to-b from-white to-emerald-50 pt-8 pb-20">
+      
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-40 -right-20 w-72 h-72 animate-blob" />
         <div className="absolute -bottom-20 left-40 w-72 h-72 animate-blob animation-delay-4000" />
+       
       </div>
 
       <div className="max-w-6xl mx-auto px-4 space-y-12 relative">

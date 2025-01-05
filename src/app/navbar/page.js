@@ -8,18 +8,18 @@ const NavBar = () => {
   const menuItems = [
     { title: 'Home', href: '/' },
     { title: 'Projects', href: '#projects' },
-    { title: 'Experience', href: 'experience' },
+    { title: 'About', href: '#about' },
     { title: 'Contact', href: '#contact' }
   ];
 
   return (
-    <nav className="bg-emerald-600 fixed w-full top-0 left-0 z-50 shadow-lg">
+    <nav className="bg-gradient-to-r from-emerald-500 to-green-600 fixed w-full top-0 left-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-white font-bold text-xl">
-              Portfolio
+            <a href="/" className="text-white font-bold text-2xl">
+              Prashamsa Aryal
             </a>
           </div>
 

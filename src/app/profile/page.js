@@ -1,3 +1,5 @@
+
+"use client"
 import React from "react";
 import Image from "next/image";
 import { Github, Linkedin, Mail, ArrowRight, Youtube } from "lucide-react";
@@ -73,8 +75,10 @@ const Profile = () => {
                   </a>
                 </div>
 
-                <button className="group inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors animate-slideDown animation-delay-1000">
-                  Contact Me
+                <button  onClick={(()=>
+              window.location.href = "https://www.linkedin.com/in/prashamsa-aryal-07840224b/")}
+                            className="group inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors animate-slideDown animation-delay-1000">
+                  Contact Me 
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                 </button>
               </div>
