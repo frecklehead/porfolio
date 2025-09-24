@@ -124,6 +124,13 @@ const Projects = () => {
 
    const projectsData = [
     {
+      title: 'Rakshya-Kawach',
+      description: "An innovative web application that simulates job interviews using AI. Features include real-time speech recognition, dynamic question generation based on job descriptions, and immediate feedback on responses. Built with Rect for the frontend and integrated with Gemini's API for natural language processing.",
+      Source: "https://github.com/frecklehead/rk",
+      videoUrl: "https://www.youtube.com/watch?v=AOAALfqe9D8", 
+      tags: ["Tenserflow.js", "Three.js","Posenet","GeminiAPI"]
+    },
+    {
       title: 'AI Interviewer',
       description: "An innovative web application that simulates job interviews using AI. Features include real-time speech recognition, dynamic question generation based on job descriptions, and immediate feedback on responses. Built with Rect for the frontend and integrated with Gemini's API for natural language processing.",
       Source: "https://github.com/frecklehead/Interview_master",
