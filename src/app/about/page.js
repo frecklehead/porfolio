@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ContentSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,78 +15,116 @@ const ContentSlider = ({ slides }) => {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const slideVariants = {
+    enter: { opacity: 0, x: 1000 },
+    center: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -1000 },
+  };
+
   return (
     <div className="relative w-full">
       {/* Navigation Buttons */}
-               
       <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between z-10 px-4">
-        <button
+        <motion.button
           onClick={prevSlide}
-          className="bg-emerald-100 hover:bg-emerald-200 text-emerald-700 p-3 rounded-full shadow-lg transition-all transform hover:-translate-x-1"
+          className="bg-emerald-900/60 hover:bg-emerald-800/80 text-emerald-300 p-3 rounded-full shadow-lg transition-all border border-emerald-500/30 backdrop-blur-sm"
+          whileHover={{ scale: 1.2, x: -5 }}
+          whileTap={{ scale: 0.9 }}
         >
           <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={nextSlide}
-          className="bg-emerald-100 hover:bg-emerald-200 text-emerald-700 p-3 rounded-full shadow-lg transition-all transform hover:translate-x-1"
+          className="bg-emerald-900/60 hover:bg-emerald-800/80 text-emerald-300 p-3 rounded-full shadow-lg transition-all border border-emerald-500/30 backdrop-blur-sm"
+          whileHover={{ scale: 1.2, x: 5 }}
+          whileTap={{ scale: 0.9 }}
         >
           <ChevronRight className="w-6 h-6" />
-        </button>
+        </motion.button>
       </div>
 
       {/* Content and Image Container */}
-      <div className="overflow-hidden rounded-2xl bg-white/70 backdrop-blur-lg border border-emerald-100 shadow-lg"> 
-        <div 
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {slides.map((slide, index) => (
-            <div key={index} className="w-full flex-shrink-0">
-              <div className="grid lg:grid-cols-2 gap-12 p-12">
-                {/* Image */}
-                <div className="relative h-[500px] rounded-2xl overflow-hidden group">
-                  
-                  <div className="absolute inset-0 bg-emerald-600/10 group-hover:bg-emerald-600/0 transition-colors duration-300" />
-                  <Image
-                    src={slide.image}
-                    alt={slide.title}
-                    width={600}
-                    height={600}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
+      <motion.div 
+        className="overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-950/50 to-black/50 backdrop-blur-lg border border-emerald-500/30 shadow-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid lg:grid-cols-2 gap-12 p-8 md:p-12">
+              {/* Image */}
+              <motion.div 
+                className="relative h-[500px] rounded-2xl overflow-hidden group"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div 
+                  className="absolute inset-0 bg-emerald-600/10"
+                  animate={{ opacity: [0.1, 0, 0.1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+                <Image
+                  src={slides[currentIndex].image}
+                  alt={slides[currentIndex].title}
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
 
-                {/* Content */}
-                <div className="flex flex-col justify-center space-y-8">
-                  <div className="space-y-2">
-                    <div className="text-emerald-600 font-medium text-lg animate-slideDown">
-                      {slide.subtitle}
-                    </div>
-                    <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent animate-slideDown">
-                      {slide.title}
-                    </h2>
+              {/* Content */}
+              <div className="flex flex-col justify-center space-y-8">
+                <motion.div 
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <div className="text-emerald-600 font-medium text-lg">
+                    {slides[currentIndex].subtitle}
                   </div>
-                  <div className="prose text-gray-600 leading-relaxed animate-slideDown animation-delay-300">
-                    {slide.content}
-                  </div>
-                </div>
+                  <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                    {slides[currentIndex].title}
+                  </h2>
+                </motion.div>
+
+                <motion.div 
+                  className="prose text-gray-600 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  {slides[currentIndex].content}
+                </motion.div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
 
       {/* Dots Navigation */}
       <div className="flex justify-center gap-3 mt-8">
         {slides.map((_, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-300 h-3 rounded-full ${
               index === currentIndex
                 ? 'w-12 bg-emerald-600'
                 : 'w-3 bg-emerald-200 hover:bg-emerald-300'
-            } h-3 rounded-full`}
+            }`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
           />
         ))}
       </div>
@@ -170,16 +209,23 @@ const About = () => {
   ];
 
   return (
-    <section id ="about" className="relative min-h-screen bg-gradient-to-b from-white to-emerald-50 pt-8 pb-20">
+    <section id="about" className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-black pt-8 pb-20 overflow-hidden">
       
       {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-40 -right-20 w-72 h-72 animate-blob" />
-        <div className="absolute -bottom-20 left-40 w-72 h-72 animate-blob animation-delay-4000" />
-       
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          className="absolute top-40 -right-20 w-72 h-72 bg-emerald-600/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+          animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute -bottom-20 left-40 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+          animate={{ x: [0, -100, 0], y: [0, -50, 0] }}
+          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+        />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 space-y-12 relative">
+      <div className="max-w-6xl mx-auto px-4 space-y-12 relative z-10">
         {/* Content Slider */}
         <ContentSlider slides={slides} />
       </div>
