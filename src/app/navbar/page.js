@@ -8,13 +8,13 @@ const NavBar = () => {
 
   const menuItems = [
     { title: 'Home', href: '/' },
-    { title: 'Projects', href: '/projects' },
-    { title: 'Skills', href: '/skills' },
-    { title: 'Blog', href: '/blog' },
-    { title: 'Achievements', href: '/achievements' },
-    { title: 'Volunteering', href: '/volunteering' },
-    { title: 'About', href: '/about' },
-    { title: 'Contact', href: '/contact' }
+    { title: 'Projects', href: '#projects' },
+    { title: 'Skills', href: '#skills' },
+    { title: 'Blog', href: '#blog' },
+    { title: 'Achievements', href: '#achievements' },
+    { title: 'Volunteering', href: '#volunteering' },
+    { title: 'About', href: '#about' },
+    { title: 'Contact', href: '#contact' }
   ];
 
   const containerVariants = {

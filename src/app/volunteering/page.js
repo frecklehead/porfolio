@@ -6,12 +6,12 @@ import { Heart, Calendar, MapPin } from 'lucide-react';
 const Volunteering = () => {
   const volunteeringData = [
     {
-      title: "Community Tech Mentor",
-      organization: "Tech For All Nepal",
+      title: "Webmaster",
+      organization: "Women in Engineering",
       duration: "2023 - Present",
       location: "Kathmandu, Nepal",
-      description: "Mentoring underprivileged students in web development and programming fundamentals. Conducting monthly workshops on latest technologies and best practices.",
-      impact: "50+ students mentored"
+      description: "Designed and maintained the WIE  website  https://edu.ieee.org/np-iep-wie/",
+      
     },
     {
       title: "Open Source Contributor",
@@ -21,14 +21,7 @@ const Volunteering = () => {
       description: "Contributing to various open-source projects. Helping with bug fixes, feature development, and documentation improvements.",
       impact: "15+ repositories contributed"
     },
-    {
-      title: "AI Workshop Facilitator",
-      organization: "Tech Innovation Hub",
-      duration: "2023 - 2024",
-      location: "Kathmandu, Nepal",
-      description: "Conducted workshops on AI integration in web applications. Trained 100+ developers on practical AI implementation.",
-      impact: "100+ participants trained"
-    }
+
   ];
 
   const containerVariants = {

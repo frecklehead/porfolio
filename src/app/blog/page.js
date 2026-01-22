@@ -72,7 +72,7 @@ const Blog = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-slate-900 to-black">
+    <section id='blog' className="relative min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-slate-900 to-black">
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

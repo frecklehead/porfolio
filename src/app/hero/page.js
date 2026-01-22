@@ -1,31 +1,29 @@
 "use client"
-import React from "react";
-import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { ArrowDown, Github, Linkedin, Mail, ExternalLink, Sparkles } from "lucide-react";
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ 
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100
+      });
+    };
+
+    const handleScroll = () => setScrollY(window.scrollY);
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/frecklehead", label: "GitHub" },
@@ -34,122 +32,138 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden pt-32 pb-20 bg-gradient-to-b from-slate-950 via-slate-900 to-black">
-      {/* Animated gradient background with green tones */}
+    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Animated background with dark green accents */}
       <div className="absolute inset-0">
-        {/* Grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:50px_50px] opacity-50"></div>
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-black"></div>
         
-        {/* Animated gradient orbs - emerald and dark green */}
-        <motion.div
-          className="absolute top-20 right-10 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl"
-          animate={{ y: [0, 50, 0], x: [0, -30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-80 h-80 bg-green-600/15 rounded-full blur-3xl"
-          animate={{ y: [0, -50, 0], x: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/3 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"
-          animate={{ y: [0, 30, 0], x: [0, -50, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        />
+        {/* Grid overlay */}
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgb(5, 46, 22) 1px, transparent 1px),
+              linear-gradient(to bottom, rgb(5, 46, 22) 1px, transparent 1px)
+            `,
+            backgroundSize: '4rem 4rem'
+          }}
+        ></div>
+
+        {/* Mouse-following gradient */}
+        <div 
+          className="absolute inset-0 opacity-30 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(5, 150, 105, 0.15), transparent 40%)`
+          }}
+        ></div>
+
+        {/* Animated orbs */}
+        <div className="absolute top-1/4 -left-20 w-72 h-72 bg-emerald-900/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-green-950/20 rounded-full blur-3xl" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <motion.div
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center items-center text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Main content */}
-        <motion.div variants={itemVariants} className="space-y-3 mb-6">
-          <span className="inline-block text-emerald-600 text-sm font-semibold tracking-wider uppercase">
-            Welcome to my portfolio
-          </span>
-        </motion.div>
-
-        <motion.h1 
-          variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-8"
-        >
-          <span className="bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-600 bg-clip-text text-transparent animate-pulse">
-            Prashamsa Aryal
-          </span>
-        </motion.h1>
-
-        <motion.p 
-          variants={itemVariants}
-          className="text-2xl sm:text-3xl text-emerald-500 font-light mb-8 max-w-2xl"
-        >
-          Full-Stack Developer & AI Enthusiast
-        </motion.p>
-
-        <motion.p 
-          variants={itemVariants}
-          className="text-lg text-gray-300 max-w-3xl leading-relaxed mb-12"
-        >
-          I build modern web applications with cutting-edge technologies. 
-          Currently focused on Next.js, React, and AI integration.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div 
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-        >
-          <a 
-            href="#projects"
-            className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-semibold rounded-lg overflow-hidden hover:shadow-2xl hover:shadow-emerald-600/40 transition-all duration-300 border border-emerald-500/50"
-          >
-            View My Projects
-            <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+      {/* Main content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <div className="w-full max-w-5xl mx-auto text-center space-y-8">
           
-          <a 
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-emerald-600/50 text-emerald-400 font-semibold rounded-lg hover:bg-emerald-600/10 hover:border-emerald-500 transition-all duration-300 backdrop-blur-sm"
-          >
-            Get in Touch
-            <Mail className="h-5 w-5" />
-          </a>
-        </motion.div>
+          {/* Badge */}
+          <div className="flex justify-center animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-900/50 bg-emerald-950/30 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-emerald-500" />
+              <span className="text-xs sm:text-sm text-emerald-400 font-medium tracking-wide uppercase">
+                Open to Work
+              </span>
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            </div>
+          </div>
 
-        {/* Social links */}
-        <motion.div 
-          variants={itemVariants}
-          className="flex justify-center gap-6 mb-16"
-        >
-          {socialLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-3 rounded-lg border border-emerald-600/30 text-emerald-500 hover:border-emerald-500 hover:bg-emerald-600/10 transition-all duration-300 backdrop-blur-sm"
-              whileHover={{ scale: 1.1, y: -4 }}
-              whileTap={{ scale: 0.95 }}
+          {/* Main heading */}
+          <div className="space-y-4" style={{ opacity: Math.max(0, 1 - scrollY * 0.002) }}>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight">
+              <span className="block text-white mb-2">
+                Prashamsa Aryal
+              </span>
+              <span className="block bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-400 bg-clip-text text-transparent">
+                Full-Stack Developer
+              </span>
+            </h1>
+          </div>
+
+          {/* Description */}
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-4">
+            Building modern web applications with <span className="text-emerald-400 font-semibold">Next.js</span>, <span className="text-emerald-400 font-semibold">React</span>, and <span className="text-emerald-400 font-semibold">AI</span>. 
+            Turning ideas into elegant digital experiences.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <a 
+              href="#projects"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-900/50 hover:scale-105"
             >
-              <link.icon className="h-6 w-6" />
-            </motion.a>
-          ))}
-        </motion.div>
+              <span>View Projects</span>
+              <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </a>
+            
+            <a 
+              href="#contact"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-emerald-900/50 hover:border-emerald-700 text-emerald-400 hover:text-emerald-300 font-semibold rounded-lg transition-all duration-300 hover:bg-emerald-950/30 backdrop-blur-sm hover:scale-105"
+            >
+              <span>Contact Me</span>
+              <Mail className="w-5 h-5" />
+            </a>
+          </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-20 flex justify-center"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <a href="#projects" className="flex flex-col items-center gap-2 text-emerald-600/60 hover:text-emerald-500 transition-colors">
-            <span className="text-sm font-medium">Scroll to explore</span>
-            <ArrowDown className="h-5 w-5" />
-          </a>
-        </motion.div>
-      </motion.div>
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-4 pt-8">
+            {socialLinks.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-3 rounded-lg border border-emerald-900/50 hover:border-emerald-700 bg-emerald-950/20 hover:bg-emerald-950/40 text-emerald-500 hover:text-emerald-400 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+                aria-label={link.label}
+              >
+                <link.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+              </a>
+            ))}
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+            <a 
+              href="#projects"
+              className="flex flex-col items-center gap-2 text-emerald-700 hover:text-emerald-500 transition-colors group"
+            >
+              <span className="text-xs font-medium tracking-wider uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+                Scroll
+              </span>
+              <div className="p-2 border border-emerald-900/50 rounded-full group-hover:border-emerald-700 transition-colors">
+                <ArrowDown className="w-4 h-4" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out forwards;
+        }
+      `}</style>
     </section>
   );
 };

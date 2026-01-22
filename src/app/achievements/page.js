@@ -8,44 +8,20 @@ const Achievements = () => {
     {
       icon: Trophy,
       category: "Competitions",
-      title: "Winner - AI Innovation Hackathon 2024",
-      description: "Won first place for developing an AI-powered interview preparation platform with innovative features",
-      date: "2024"
+      title: "Winner - Locus Hack-A-Week",
+      description: "Won first place for developing an AI-powered  virtual laboratory for rural students",
+      date: "2026"
     },
-    {
-      icon: Star,
-      category: "Awards",
-      title: "Tech Excellence Award",
-      description: "Recognized for outstanding contributions to open source projects and community development",
-      date: "2023"
-    },
-    {
-      icon: Award,
-      category: "Certifications",
-      title: "Google Cloud Professional Developer",
-      description: "Achieved professional certification in cloud development and deployment on Google Cloud Platform",
-      date: "2023"
-    },
-    {
-      icon: Zap,
-      category: "Featured",
-      title: "Featured Developer - Tech Community",
-      description: "Selected as featured developer for innovative work in AI and web technologies",
-      date: "2024"
-    },
-    {
-      icon: Star,
-      category: "Recognition",
-      title: "GitHub Arctic Code Vault Contributor",
-      description: "Selected as one of the open source developers contributing to GitHub's Arctic Code Vault",
-      date: "2023"
-    },
+    
+    
+    
+    
     {
       icon: Trophy,
       category: "Speaking",
-      title: "Keynote Speaker - TechTalk Nepal",
-      description: "Delivered keynote on 'Future of AI in Web Development' at major tech conference",
-      date: "2024"
+      title: "Tokha-Municipality Debate Competition Winner",
+      description: "Won the Debate Competition organized by Tokha municipality on Democracy Day",
+      date: "2019"
     }
   ];
 
